@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'login.apps.LoginConfig',
 
     'User',
+    'Company',
 ]
 
 MIDDLEWARE = [

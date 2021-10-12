@@ -23,5 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('User/', include('User.urls')),
     path('login/', include('login.urls')),
+    path('Company/', include('Company.urls')),
     path('', RedirectView.as_view(url='login/', permanent=True)),
-]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+]
