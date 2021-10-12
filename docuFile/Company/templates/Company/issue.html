@@ -1,0 +1,40 @@
+{% extends 'Company/base_generic.html' %}
+
+{% block sidebar %}
+ <ul class="list-unstyled components">
+    <p>Welcome</p>
+    <li>
+        <a href="/Company">Home</a>
+    </li>
+    <li>
+        <a href="#">Request View Permissions</a>
+    </li>
+    <li class="active">
+        <a href="/Company/issue">Upload Certificates</a>
+    </li>
+    <li>
+        <a href="#">Log Out</a>
+    </li>
+</ul>    
+{% endblock sidebar %}
+
+{% block body %}
+<div class="container mt-5 py-4">
+    <form method="post" action="/Company/issue">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="formGroupExampleInput">Person Id</label>
+            <input type="text" class="form-control" id="formGroupExampleInput" name="pid" placeholder="Enter unique id for the person">
+        </div>
+        <div class="form-group">
+            <label for="formGroupExampleInput2">Certificate Type</label>
+            <input type="text" class="form-control" id="formGroupExampleInput2" name="type" placeholder="Enter the type of certificate you are uploading">
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlFile1">Upload Certificate</label>
+            <input type="file" class="form-control-file" name="certificate" id="exampleFormControlFile1">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+{% endblock body %}

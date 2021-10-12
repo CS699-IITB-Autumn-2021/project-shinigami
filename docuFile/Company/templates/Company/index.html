@@ -1,1 +1,19 @@
 {% extends "Company/base_generic.html" %}
+
+{% block sidebar %}
+ <ul class="list-unstyled components">
+    <p>Welcome</p>
+    <li class="active">
+        <a href="/Company">Home</a>
+    </li>
+    <li>
+        <a href="#">Request View Permissions</a>
+    </li>
+    <li>
+        <a href="/Company/issue">Upload Certificates</a>
+    </li>
+    <li>
+        <a href="#">Log Out</a>
+    </li>
+</ul>    
+{% endblock sidebar %}

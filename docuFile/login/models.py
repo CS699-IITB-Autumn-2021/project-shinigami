@@ -11,9 +11,9 @@ class UserType(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True)
 
 class CertiInfo(models.Model):
-    user_name =models.CharField(max_length=100,blank=True)
-    certi = models.TextField()
-    user = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    certi = models.ImageField(upload_to='\img')
+    type = models.CharField(max_length=100)
 
 
 @receiver(post_save, sender=User)
