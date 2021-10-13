@@ -20,7 +20,7 @@
 
 {% block body %}
 <div class="container mt-5 py-4">
-    <form method="post" action="/Company/issue">
+    <form method="post" action="/Company/issue" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="form-group">
             <label for="formGroupExampleInput">Person Id</label>
