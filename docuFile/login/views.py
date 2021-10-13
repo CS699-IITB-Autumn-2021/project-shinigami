@@ -6,6 +6,7 @@ from .models import UserType,CertiInfo
 from django.contrib import auth
 from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def index(request):
