@@ -1,8 +1,8 @@
 Team: Shinigami
 
-Vinayak Bhartia (213050041): User homepage, Uploading of image by Institute and view by User 
-Sagar Biswas (213050079): User homepage and Patient homepage, Login and Signup
-Jaimin Chauhan (213059005): User homepage and Patient homepage, Login and Signup
+Vinayak Bhartia (213050041): User homepage, Uploading of image by Institute and view by User <br />
+Sagar Biswas (213050079): User homepage and Patient homepage, Login and Signup <br />
+Jaimin Chauhan (213059005): User homepage and Patient homepage, Login and Signup <br />
 
 Dependencies:
 -    Python3
