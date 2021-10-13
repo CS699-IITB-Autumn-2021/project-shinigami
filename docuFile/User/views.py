@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.contrib import auth
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
+
 from login.models import CertiInfo
 from pathlib import Path
 import os
