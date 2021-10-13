@@ -6,6 +6,7 @@ from .models import UserType,CertiInfo
 from django.contrib import auth
 from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def index(request):
@@ -49,7 +50,7 @@ def auth_view(request):
 	    request.session['user_type'] = u[0].user_type
 	    request.session['basefile'] = u[0].user_type+"base.html"
 	    if u[0].user_type=='Institute':
-	    	return HttpResponseRedirect('/Comapny')
+	    	return HttpResponseRedirect('/Company')
 	    elif u[0].user_type=='Personal':
 	    	request.session["username"]=u[0].user_name
 	    	return HttpResponseRedirect('/User')
