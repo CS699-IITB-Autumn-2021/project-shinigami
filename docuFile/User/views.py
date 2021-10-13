@@ -10,4 +10,4 @@ def index(request):
 
 def logout(request):
     auth.logout(request)
-    return HttpResponseRedirect('/login')
+    return HttpResponseRedirect('http://localhost:8000')
