@@ -24,7 +24,7 @@
 
   <div class="wrapper">
       <!-- Sidebar  -->
-      {% block navbar %}{% endblock navbar %}
+     {% block navbar %}{% endblock navbar %}
 
       <!-- Page Content  -->
       <div id="content">
@@ -41,8 +41,9 @@
                   </button>
 
       </div>
-
-      {% block body %}{% endblock body %}
+      <div id="content">
+        {% block body %}{% endblock body %}
+    </div>
   </div>
 
   <!-- jQuery CDN - Slim version (=without AJAX) -->

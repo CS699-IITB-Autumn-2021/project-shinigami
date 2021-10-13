@@ -24,15 +24,7 @@
 
   <div class="wrapper">
       <!-- Sidebar  -->
-      <nav id="sidebar">
-          <div class="sidebar-header">
-              <h3>DocuLocker</h3>
-          </div>
-
-         {% block sidebar %}
-         {% endblock sidebar %}
-  
-      </nav>
+      {% block navbar %}{% endblock navbar %}
 
       <!-- Page Content  -->
       <div id="content">
@@ -47,12 +39,12 @@
                   <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                       <i class="fas fa-align-justify"></i>
                   </button>
+
       </div>
       <div id="content">
-    {% block body %}{% endblock body %}
+        {% block body %}{% endblock body %}
     </div>
   </div>
- 
 
   <!-- jQuery CDN - Slim version (=without AJAX) -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

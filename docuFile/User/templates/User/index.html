@@ -30,6 +30,16 @@
 {% endblock navbar %}
 
 {% block body %}
-<h1> image </h1>
-<img height = 100px width = 100px src="{{MEDIA_URL}}{{user.certi.url}}">
+<div class="container my-5">
+    <center>
+    <u>
+    <h1> Certificates Available </h1></u>
+    </center>
+</div>
+{% for i in user %}
+<center>
+<div class="col-md-3 my-1">
+    <img src="{{ i.certi.url }}" style="width:300px;height:300px"/>
+</div></center>
+{% endfor %}
 {% endblock body %}

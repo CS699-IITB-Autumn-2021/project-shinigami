@@ -6,6 +6,7 @@ from .models import UserType,CertiInfo
 from django.contrib import auth
 from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def index(request):
@@ -21,10 +22,10 @@ def register(request):
             form.save()
             if user_type=="Personal":
                 x = User.objects.get(username=user_name)
-                # y = CertiInfo.objects.get(user_id=x.id)
-                # y.user_name=user_name
-                # y.certi = ""
-                # y.save()
+                y = CertiInfo.objects.get(user_id=x.id)
+                y.user_name=user_name
+                y.certi = ""
+                y.save()
             t = User.objects.get(username=user_name)
             u = UserType.objects.get(user_id=t.id)
             u.user_type=user_type
