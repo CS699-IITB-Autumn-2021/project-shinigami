@@ -9,6 +9,8 @@ Dependencies:
 -    Django
 
 Running the app:
+- git clone https://github.com/CS699-IITB-Autumn-2021/project-shinigami
+- cd docuFile
 -	python manage.py makemigrations
 -	python manage.py migrate
 -	python manage.py runserver
