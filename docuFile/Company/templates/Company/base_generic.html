@@ -24,6 +24,8 @@
 
   <div class="wrapper">
       <!-- Sidebar  -->
+      {% block navbar %}{% endblock navbar %}
+
       <nav id="sidebar">
           <div class="sidebar-header">
               <h3>DocuLocker</h3>
@@ -63,6 +65,9 @@
                   </button>
 
       </div>
+      <div id="content">
+        {% block body %}{% endblock body %}
+    </div>
   </div>
 
   <!-- jQuery CDN - Slim version (=without AJAX) -->
