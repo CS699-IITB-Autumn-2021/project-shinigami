@@ -12,6 +12,7 @@ class UserType(models.Model):
 
 class CertiInfo(models.Model):
     user = models.CharField(max_length=100)
+    insti = models.CharField(max_length=100)
     certi = models.FileField()
     type = models.CharField(max_length=100)
 
