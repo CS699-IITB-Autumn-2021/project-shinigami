@@ -12,6 +12,7 @@ class UserType(models.Model):
 
 class CertiInfo(models.Model):
     user = models.CharField(max_length=100)
+    insti = models.CharField(max_length=100)
     certi = models.FileField()
     type = models.CharField(max_length=100)
 
@@ -24,14 +25,4 @@ def create_user_profile(sender, instance, created, **kwargs):
 
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
-    instance.usertype.save()
-
-@receiver(post_save, sender=User)
-def create_user_certi(sender, instance, created, **kwargs):
-    if created:
-        CertiInfo.objects.create(user=instance)
-
-
-@receiver(post_save, sender=User)
-def save_user_certi(sender, instance, **kwargs):
     instance.usertype.save()

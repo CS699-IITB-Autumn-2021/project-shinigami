@@ -13,7 +13,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 @login_required(login_url = '/login')
 def index(request):
     user = CertiInfo.objects.filter(user = request.session["username"])
-    src = os.path.join(BASE_DIR, 'media/')
     context = {
         'user': user
     }

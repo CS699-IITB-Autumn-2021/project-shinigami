@@ -20,12 +20,6 @@ def register(request):
             user_name = request.POST.get('username', '')
             print(user_type)
             form.save()
-            if user_type=="Personal":
-                x = User.objects.get(username=user_name)
-                y = CertiInfo.objects.get(user_id=x.id)
-                y.user_name=user_name
-                y.certi = ""
-                y.save()
             t = User.objects.get(username=user_name)
             u = UserType.objects.get(user_id=t.id)
             u.user_type=user_type
