@@ -2,44 +2,52 @@
 
 {% block navbar %}
 <nav id="sidebar">
-          <div class="sidebar-header">
-              <h3>DocuLocker</h3>
-          </div>
+    <div class="sidebar-header">
+        <h3>DocuLocker</h3>
+    </div>
 
-          <ul class="list-unstyled components">
-              <p>Welcome User</p>
-              <li class="active">
-                  <a href="#">Home</a>
-              </li>
-              <li>
-                  <a href="#">Pending View Requests</a>
-              </li>
-              <li>
-                  <a href="#">Granted View Requests</a>
-              </li>
-              <li>
-                  <a href="#">Request Certificate</a>
-              </li>
-              <li>
-                <a href="#">Log Out</a>
-            </li>
-          </ul>
+    <ul class="list-unstyled components">
+        <p>Welcome User</p>
+        <li class="active">
+            <a href="#">Home</a>
+        </li>
+        <li>
+            <a href="#">Pending View Requests</a>
+        </li>
+        <li>
+            <a href="#">Granted View Requests</a>
+        </li>
+        <li>
+            <a href="#">Request Certificate</a>
+        </li>
+        <li>
+            <a href="#">Log Out</a>
+        </li>
+    </ul>
 
-          
-      </nav>
+
+</nav>
 {% endblock navbar %}
 
 {% block body %}
 <div class="container my-5">
     <center>
-    <u>
-    <h1> Certificates Available </h1></u>
+        <u>
+            <h1> Certificates Available </h1>
+        </u>
     </center>
 </div>
+{% if user.certi %}
 {% for i in user %}
 <center>
-<div class="col-md-3 my-1">
-    <img src="{{ i.certi.url }}" style="width:300px;height:300px"/>
-</div></center>
+    {% empty %}
+    <li>Sorry, no athletes in this list.</li>
+    <div class="col-md-3 my-1">
+        <img src="{{ i.certi.url }}" style="width:300px;height:300px" />
+    </div>
+</center>
 {% endfor %}
+{% else %}
+<p>Sorry, no Certificates </p>
+{% endif %}
 {% endblock body %}
