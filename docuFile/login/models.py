@@ -16,7 +16,6 @@ class CertiInfo(models.Model):
     certi = models.FileField()
     type = models.CharField(max_length=100)
 
-
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:

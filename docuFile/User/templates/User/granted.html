@@ -8,13 +8,13 @@
 
     <ul class="list-unstyled components">
         <p>Welcome {{username}}</p>
-        <li class="active">
+        <li>
             <a href="/User">Home</a>
         </li>
         <li>
             <a href="/User/pending">Pending View Requests</a>
         </li>
-        <li>
+        <li class="active">
             <a href="/User/granted">Granted View Requests</a>
         </li>
         <li>
@@ -24,8 +24,6 @@
             <a href="/login">Log Out</a>
         </li>
     </ul>
-
-
 </nav>
 {% endblock navbar %}
 
@@ -33,34 +31,40 @@
 <div class="container my-5">
     <center>
         <u>
-            <h1> Certificates Available </h1>
+            <h1> Granted View Requests</h1>
         </u>
     </center>
 </div>
-{% if user %}
+{% if grant %}
 <table class="table">
     <thead class="thead-dark">
         <tr>
-            <th scope="col">No.</th>
-            <th scope="col">I/C Name</th>
-            <th scope="col">Certificate of</th>
-            <th scope="col">Actions</th>
+            <th scope="col"><center>No.</center></th>
+            <th scope="col"><center>I/C Name</center></th>
+            <th scope="col"><center>Discard Permission</center></th>
         </tr>
     </thead>
     <tbody>
-        {% for i in user %}
+        {% for i in grant %}
         <tr>
-            <th scope="row">{{ forloop.counter }}</th>
-            <td>{{ i.insti }}</td>
-            <td>{{i.type}}</td>
-            <td><a href="{{i.certi.url}}" download>Download</a>  preview</td>
+            <th scope="row"><center>{{ forloop.counter }}</center></th>
+            <td><center>{{ i.ifirst }} {{ i.ilast }}</center></td>
+            <td>
+                <center>
+                <form method="POST" action="/User/granted" enctype="multipart/form-data">
+                {% csrf_token %}
+                    <button type="submit" class="btn btn-warning" name="temp_{{i.ifirst}}_{{i.ilast}}">Temporarily</button>
+                    <button type="submit" class="btn btn-danger" name="per_{{i.ifirst}}_{{i.ilast}}">Permanently</button>
+                </form>
+                </center>
+            </td>
         </tr>
         {% endfor %}
         {% else %}
         <div class="container mt-5">
             <center>
             <br><br>
-            <h4>Sorry, No Certificates currently issued!</h4>
+            <h4>No Granted Request</h4>
             </center>
         </div>
         {% endif %}
