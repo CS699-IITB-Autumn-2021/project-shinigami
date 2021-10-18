@@ -12,9 +12,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Create your views here.
 @login_required(login_url = '/login')
 def index(request):
-    user = CertiInfo.objects.filter(user = request.session["username"])
+    user = CertiInfo.objects.filter(user = request.COOKIES["username"])
     context = {
-        'user': user
+        'user': user,
+        'username': request.COOKIES["username"]
     }
     return render(request, 'User/index.html', context)
 

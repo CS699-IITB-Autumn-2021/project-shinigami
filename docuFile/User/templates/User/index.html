@@ -7,7 +7,7 @@
     </div>
 
     <ul class="list-unstyled components">
-        <p>Welcome User</p>
+        <p>Welcome {{username}}</p>
         <li class="active">
             <a href="/User">Home</a>
         </li>
@@ -38,14 +38,27 @@
     </center>
 </div>
 {% if user %}
-{% for i in user %}
-<center>
-    <div class="col-md-3 my-1">
-        <img src="{{ i.certi.url }}" style="width:300px;height:300px" />
-    </div>
-</center>
-{% endfor %}
-{% else %}
-<p>Sorry, no Certificates </p>
-{% endif %}
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">No.</th>
+            <th scope="col">I/C Name</th>
+            <th scope="col">Certificate of</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in user %}
+        <tr>
+            <th scope="row">{{ forloop.counter }}</th>
+            <td>{{ i.insti }}</td>
+            <td>{{i.type}}</td>
+            <td><a href="{{i.certi.url}}" download>Download</a>  preview</td>
+        </tr>
+        {% endfor %}
+        {% else %}
+        <p>Sorry, no Certificates </p>
+        {% endif %}
+    </tbody>
+</table>
 {% endblock body %}
