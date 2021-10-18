@@ -1,4 +1,4 @@
-{% extends "Company/base_generic.html" %}
+{% extends 'Company/base_generic.html' %}
 
 {% block navbar %}
 <nav id="sidebar">
@@ -8,13 +8,13 @@
 
           <ul class="list-unstyled components">
               <p>Welcome</p>
-              <li class="active">
+              <li>
                   <a href="/Company">Home</a>
               </li>
               <li>
                   <a href="/Company/request">Request View Permissions</a>
               </li>
-              <li>
+              <li class="active">
                   <a href="/Company/pending">Pending View Permissions</a>
               </li>
               <li>
@@ -33,32 +33,29 @@
 <div class="container my-5">
     <center>
         <u>
-            <h1> Certificates Requested</h1>
+            <h1> Pending View Permissions</h1>
         </u>
     </center>
 </div>
-{% if data %}
+{% if req %}
 <table class="table">
     <thead class="thead-dark">
         <tr>
             <th scope="col"><center>No.</center></th>
             <th scope="col"><center>User Unique Id</center></th>
-            <th scope="col"><center>Type of Certificate</center></th>
             <th scope="col"><center>Actions</center></th>
         </tr>
     </thead>
     <tbody>
-        {% for i in data %}
+        {% for i in req %}
         <tr>
             <th scope="row"><center>{{ forloop.counter }}</center></th>
             <td><center>{{ i.uid }}</center></td>
-            <td><center>{{ i.type }}</center></td>
             <td>
                 <center>
-                <form method="POST" action="/Company/" enctype="multipart/form-data">
+                <form method="POST" action="/Company/pending" enctype="multipart/form-data">
                 {% csrf_token %}
-                    <button type="submit" class="btn btn-success" name="issue_{{i.uid}}_{{i.type}}">Issue</button>
-                    <button type="submit" class="btn btn-danger" name="decline_{{i.uid}}_{{i.type}}">Decline</button>
+                    <button type="submit" class="btn btn-danger" name="{{i.uid}}">Discontinue</button>
                 </form>
                 </center>
             </td>
@@ -68,7 +65,7 @@
         <div class="container mt-5">
             <center>
             <br><br>
-            <h4>No Pending Request!</h4>
+            <h4>No Pending Permission</h4>
             </center>
         </div>
         {% endif %}

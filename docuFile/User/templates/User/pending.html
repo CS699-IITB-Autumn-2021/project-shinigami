@@ -8,10 +8,10 @@
 
     <ul class="list-unstyled components">
         <p>Welcome {{username}}</p>
-        <li class="active">
+        <li>
             <a href="/User">Home</a>
         </li>
-        <li>
+        <li class="active">
             <a href="/User/pending">Pending View Requests</a>
         </li>
         <li>
@@ -24,8 +24,6 @@
             <a href="/login">Log Out</a>
         </li>
     </ul>
-
-
 </nav>
 {% endblock navbar %}
 
@@ -33,34 +31,40 @@
 <div class="container my-5">
     <center>
         <u>
-            <h1> Certificates Available </h1>
+            <h1> Pending View Requests</h1>
         </u>
     </center>
 </div>
-{% if user %}
+{% if req %}
 <table class="table">
     <thead class="thead-dark">
         <tr>
-            <th scope="col">No.</th>
-            <th scope="col">I/C Name</th>
-            <th scope="col">Certificate of</th>
-            <th scope="col">Actions</th>
+            <th scope="col"><center>No.</center></th>
+            <th scope="col"><center>I/C Name</center></th>
+            <th scope="col"><center>Actions</center></th>
         </tr>
     </thead>
     <tbody>
-        {% for i in user %}
+        {% for i in req %}
         <tr>
-            <th scope="row">{{ forloop.counter }}</th>
-            <td>{{ i.insti }}</td>
-            <td>{{i.type}}</td>
-            <td><a href="{{i.certi.url}}" download>Download</a>  preview</td>
+            <th scope="row"><center>{{ forloop.counter }}</center></th>
+            <td><center>{{ i.ifirst }} {{ i.ilast }}</center></td>
+            <td>
+                <center>
+                <form method="POST" action="/User/pending" enctype="multipart/form-data">
+                {% csrf_token %}
+                    <button type="submit" class="btn btn-success" name="accept_{{i.ifirst}}_{{i.ilast}}">Accept</button>
+                    <button type="submit" class="btn btn-danger" name="reject_{{i.ifirst}}_{{i.ilast}}">Reject</button>
+                </form>
+                </center>
+            </td>
         </tr>
         {% endfor %}
         {% else %}
         <div class="container mt-5">
             <center>
             <br><br>
-            <h4>Sorry, No Certificates currently issued!</h4>
+            <h4>No Pending Request</h4>
             </center>
         </div>
         {% endif %}
