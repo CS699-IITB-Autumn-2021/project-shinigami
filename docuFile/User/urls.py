@@ -6,5 +6,6 @@ urlpatterns = [
     path('logout',views.logout, name='logout'),
     path('pending', views.pending, name='pending'),
     path('granted', views.granted, name='granted'),
-    path('request', views.request, name='request')
+    path('request', views.request, name='request'),
+    path('home', views.home, name='home')
 ]
