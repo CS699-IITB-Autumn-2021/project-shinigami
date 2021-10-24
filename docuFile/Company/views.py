@@ -3,6 +3,10 @@ from Company.models import viewRequest
 from User.models import certiRequest
 from login.models import CertiInfo
 from django.contrib.auth.models import User
+from django.conf import settings
+from django.core.mail import send_mail
+
+import random
 
 # Create your views here.
 from django.contrib.auth.decorators import login_required
@@ -39,6 +43,18 @@ def logout(request):
     auth.logout(request)
     return HttpResponseRedirect('http://localhost:8000')
 
+def enc_img(img,key):
+    # performing XOR operation on each value of bytearray
+    fin = open("media/"+img, 'rb')
+    image = fin.read()
+    fin.close()
+    image = bytearray(image)
+    for index, values in enumerate(image):
+        image[index] = values ^ key
+    fin = open("media/"+img, 'wb')
+    fin.write(image)
+    fin.close()
+
 def issue(request):
     if request.method == 'POST':
         username = request.POST.get('pid')
@@ -52,6 +68,7 @@ def issue(request):
             t = certiRequest.objects.filter(uid = username, type = typeC, iid = request.COOKIES["compname"])
             if t != None:
                 t.delete()
+            #enc_img(request.FILES['certificate'].name,key)
     return render(request, 'Company/issue.html')
 
 def request(request):
