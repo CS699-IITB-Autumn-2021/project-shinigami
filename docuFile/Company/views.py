@@ -72,13 +72,7 @@ def issue(request):
             image = request.FILES['certificate']
             userC = CertiInfo.objects.create(user=username,insti = request.COOKIES["compname"],type=typeC, certi=image)
             userC.save()
-            key = random.randint(1, 100)
-            subject = 'welcome to docuFile'
-            message = f'Hi , thank you for registering in docuFile.\n Your password is'+str(key)
-            email_from = settings.EMAIL_HOST_USER
-            recipient_list = ["jaiminchauhan23@gmail.com", ]
-            send_mail( subject, message, email_from, recipient_list )
-            enc_img(request.FILES['certificate'].name,key)
+            #enc_img(request.FILES['certificate'].name,key)
 
     return render(request, 'Company/issue.html')
 
