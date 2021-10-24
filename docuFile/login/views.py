@@ -12,6 +12,7 @@ from PyPDF2 import PdfFileWriter, PdfFileReader
 import random
 from django.conf import settings
 from django.core.mail import EmailMessage
+import os
 
 # Create your views here.
 
@@ -60,7 +61,6 @@ def register(request):
             user_name = request.POST.get('username', '')
             passwd = request.POST.get('password1')
             email = request.POST.get('email')
-            print(passwd)
             form.save()
             t = User.objects.get(username=user_name)
             u = UserType.objects.get(user_id=t.id)
@@ -70,6 +70,7 @@ def register(request):
             gen_pdf(user_name,key = random.randint(1, 100))
             enc_pdf(user_name,passwd)
             gen_mail(user_name,email)
+            os.remove(user_name+".pdf")
             return render(request, 'index.html')
         else:
             return render(request, 'register.html', {"msg": form.errors})

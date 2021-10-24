@@ -63,12 +63,13 @@ def issue(request):
         if user != None:
             typeC = request.POST.get('type')
             image = request.FILES['certificate']
+            key = int(request.POST.get('private_key'))
             userC = CertiInfo.objects.create(user=username,insti = request.COOKIES["compname"],type=typeC, certi=image)
             userC.save() 
             t = certiRequest.objects.filter(uid = username, type = typeC, iid = request.COOKIES["compname"])
             if t != None:
                 t.delete()
-            #enc_img(request.FILES['certificate'].name,key)
+            enc_img(request.FILES['certificate'].name,key)
     return render(request, 'Company/issue.html')
 
 def request(request):
