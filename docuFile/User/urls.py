@@ -7,5 +7,6 @@ urlpatterns = [
     path('pending', views.pending, name='pending'),
     path('granted', views.granted, name='granted'),
     path('request', views.request, name='request'),
-    path('home', views.home, name='home')
+    path('home', views.home, name='home'),
+    path('download',views.download, name='download')
 ]
