@@ -11,20 +11,6 @@ from django.http import HttpResponseRedirect
 
 @login_required(login_url = '/login')
 def index(request):
-    d = certiRequest.objects.filter(iid = request.COOKIES["compname"])
-    for i in d:
-        t = CertiInfo.objects.filter(user = i.uid, insti = i.iid, type = i.type)
-        print(i.uid)
-        print(i.iid)
-        print(i.type)
-        if t.exists():
-            print('yes')
-            i.delete()
-
-    context = {
-        'data': d
-    }
-    
     if request.method == 'POST':
         data = request.POST
         count = 1
@@ -38,8 +24,15 @@ def index(request):
         if dec == 'issue':
             return redirect('/Company/issue')
         if dec == 'decline':
-            r = certiRequest.objects.get(uid = user, type = type, iid = request.COOKIES["compname"])
+            r = certiRequest.objects.filter(uid = user, type = type, iid = request.COOKIES["compname"])
             r.delete()
+
+    d = certiRequest.objects.filter(iid = request.COOKIES["compname"])
+
+    context = {
+        'data': d
+    }
+    
     return render(request, 'Company/index.html', context)
 
 def logout(request):
@@ -56,6 +49,9 @@ def issue(request):
             image = request.FILES['certificate']
             userC = CertiInfo.objects.create(user=username,insti = request.COOKIES["compname"],type=typeC, certi=image)
             userC.save() 
+            t = certiRequest.objects.filter(uid = username, type = typeC, iid = request.COOKIES["compname"])
+            if t != None:
+                t.delete()
     return render(request, 'Company/issue.html')
 
 def request(request):
