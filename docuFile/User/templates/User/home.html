@@ -1,0 +1,43 @@
+{% extends "User/base_generic.html" %}
+
+{% block navbar %}
+<nav id="sidebar">
+    <div class="sidebar-header">
+        <h3>DocuLocker</h3>
+    </div>
+
+    <ul class="list-unstyled components">
+        <p>Welcome {{username}}</p>
+        <li class="active">
+            <a href="/User">Home</a>
+        </li>
+        <li>
+            <a href="/User/pending">Pending View Requests</a>
+        </li>
+        <li>
+            <a href="/User/granted">Granted View Requests</a>
+        </li>
+        <li>
+            <a href="/User/request">Request Certificate</a>
+        </li>
+        <li>
+            <a href="/login">Log Out</a>
+        </li>
+    </ul>
+
+
+</nav>
+{% endblock navbar %}
+
+{% block body %}
+<div class="container mt-5 py-4">
+    <form method="post" action="/User/home" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="formGroupExampleInput">Private Key</label>
+            <input type="text" class="form-control" id="formGroupExampleInput" name="private_key" placeholder="Enter your unique private key to view certificates">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+{% endblock body %}
