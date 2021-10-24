@@ -7,6 +7,8 @@ from User.models import certiRequest
 from login.models import CertiInfo
 from Company.models import viewRequest
 from pathlib import Path
+from django.core.mail import EmailMessage
+from django.conf import settings
 import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -73,12 +75,25 @@ def granted(request):
     }
     return render(request, 'User/granted.html', context)
 
+def send_mail(imail,key,user):
+    subject = 'Welcome to docuFile'
+    message = f'Hi,\n'+user+' is requested for some document.\nPrivate key for that is '+str(key)+' .\n\nRegards,\ndocuFile.'
+    email_from = settings.EMAIL_HOST_USER
+    recipient_list = ["jaiminchauhan23@gmail.com", ]
+    email = EmailMessage(subject, message, email_from, recipient_list)
+    email.send()
+
 def request(request):
     if request.method == 'POST':
         insti = request.POST.get('iid')
         type = request.POST.get('type')
         user = request.COOKIES["username"]
+        key = 22
         d = certiRequest.objects.filter(uid = user, iid = insti, type = type)
+        imail = User.objects.filter(username=insti)[0].email
+        fname = User.objects.filter(username=user)[0].first_name
+        lname = User.objects.filter(username=user)[0].last_name
+        send_mail(imail,key,fname+' '+lname)
         if not d.exists():
             r = certiRequest.objects.create(uid = user, iid = insti, type = type)
             r.save()
