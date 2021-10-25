@@ -44,6 +44,7 @@ Users can store their documents safely in DocuFile and share them with a registe
 ## How to use the app:
 1. Install the dependencies first:
     * Python3 can be installed using the following documentation: https://docs.python.org/3/using/index.html
+    * Next, open the terminal and type the following commands:
     * pip install Django
     * pip install fpdf
     * pip install PyPDF2
