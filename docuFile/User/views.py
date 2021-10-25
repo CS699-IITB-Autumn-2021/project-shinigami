@@ -9,6 +9,7 @@ from Company.models import viewRequest
 from pathlib import Path
 from django.core.mail import EmailMessage
 from django.conf import settings
+from django.http import HttpResponse
 import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -18,11 +19,34 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 def index(request):
     return render(request, 'User/home.html')
 
+def dec_img(path,key):
+    fin = open("media/"+path, 'rb')
+    image = fin.read()
+    fin.close()
+    image = bytearray(image)
+    for index, values in enumerate(image):
+        image[index] = values ^ key
+    return image
+
+def download(request):
+    key = int(request.GET['pkey'])
+    print(key)
+    path = request.GET['path']
+    payload = dec_img(path,key)
+    response = HttpResponse(bytes(payload), headers={ 'Content-Type': 'application/octet-stream', 'Content-Disposition': 'attachment; filename="'+path+'"'})
+    return response
+
 def home(request):
     user = CertiInfo.objects.filter(user = request.COOKIES["username"])
+    key = int(request.POST.get('private_key'))
+    fname = []
+    for i in user:
+        fname.append(i.certi)
     context = {
         'user': user,
-        'username': request.COOKIES["username"]
+        'username': request.COOKIES["username"],
+        'private_key': key,
+        'names':fname,
     }
     return render(request, 'User/index.html', context)
 
@@ -91,7 +115,7 @@ def request(request):
         insti = request.POST.get('iid')
         type = request.POST.get('type')
         user = request.COOKIES["username"]
-        key = 22
+        key = request.POST.get('private_key')
         d = certiRequest.objects.filter(uid = user, iid = insti, type = type)
         imail = User.objects.filter(username=insti)[0].email
         fname = User.objects.filter(username=user)[0].first_name

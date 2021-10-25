@@ -38,6 +38,7 @@
     </center>
 </div>
 {% if user %}
+
 <table class="table">
     <thead class="thead-dark">
         <tr>
@@ -53,7 +54,7 @@
             <th scope="row">{{ forloop.counter }}</th>
             <td>{{ i.insti }}</td>
             <td>{{i.type}}</td>
-            <td><a href="{{i.certi.url}}" download>Download</a>  preview</td>
+            <td><a href="/User/download?path={{i.certi}}&pkey={{private_key}}">Download</a></td>
         </tr>
         {% endfor %}
         {% else %}
