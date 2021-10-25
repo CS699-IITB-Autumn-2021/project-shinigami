@@ -59,7 +59,7 @@ Users can store their documents safely in DocuFile and share them with a registe
     * If you are a User, you can view your documents on the homepage.
     * If you are a Institute/Company, you can view pending Certificate requests on the homepage and also search for User's documents whose access you already have.
 
-### Primary stakeholders of DocuFile:
+## Primary stakeholders of DocuFile:
 - Institute/Companies in India: They will be the main customers/buyers of this app
 - Student/Professionals: They will be the Users whose documents the Institute/Companies will check.
 - Team Shinigami: The developers of this app.
