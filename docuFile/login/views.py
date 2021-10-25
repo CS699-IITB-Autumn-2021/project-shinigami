@@ -44,14 +44,22 @@ def enc_pdf(uname,passwd):
     with open(uname+".pdf", "wb") as f:
         out.write(f)
 
-def gen_mail(uname,email):
-    subject = 'welcome to docuFile'
-    message = f'Hi , thank you for registering in docuFile.\nYour private key is in the attach file.\nPassword of that file in your acc. password.'
-    email_from = settings.EMAIL_HOST_USER
-    recipient_list = ["jaiminchauhan23@gmail.com", ]
-    email = EmailMessage(subject, message, email_from, recipient_list)
-    email.attach_file(uname+'.pdf')
-    email.send()
+def gen_mail(uname,email,user_type):
+    if user_type=="Personal":
+        subject = 'Welcome to docuFile'
+        message = f'Hi , thank you for registering in docuFile.\nYour private key is in the attach file.\nPassword of that file in your acc. password.\n\nRegards,\ndocuFile.'
+        email_from = settings.EMAIL_HOST_USER
+        recipient_list = [email]
+        email = EmailMessage(subject, message, email_from, recipient_list)
+        email.attach_file(uname+'.pdf')
+        email.send()
+    else:
+        subject = 'Welcome to docuFile'
+        message = f'Hi , thank you for registering in docuFile.\n\nRegards,\ndocuFile.'
+        email_from = settings.EMAIL_HOST_USER
+        recipient_list = [email]
+        email = EmailMessage(subject, message, email_from, recipient_list)
+        email.send()
 
 def register(request):
     if request.method == 'POST':
@@ -67,10 +75,13 @@ def register(request):
             u.user_type = user_type
             u.user_name = user_name
             u.save()
-            gen_pdf(user_name,key = random.randint(1, 100))
-            enc_pdf(user_name,passwd)
-            gen_mail(user_name,email)
-            os.remove(user_name+".pdf")
+            if user_type=="Personal":
+                gen_pdf(user_name,key = random.randint(1, 100))
+                enc_pdf(user_name,passwd)
+                gen_mail(user_name,email,user_type)
+                os.remove(user_name+".pdf")
+            else:
+                gen_mail(user_name,email,user_type)
             return render(request, 'index.html')
         else:
             return render(request, 'register.html', {"msg": form.errors})

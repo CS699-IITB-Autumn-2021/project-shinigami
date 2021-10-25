@@ -30,7 +30,6 @@ def dec_img(path,key):
 
 def download(request):
     key = int(request.GET['pkey'])
-    print(key)
     path = request.GET['path']
     payload = dec_img(path,key)
     response = HttpResponse(bytes(payload), headers={ 'Content-Type': 'application/octet-stream', 'Content-Disposition': 'attachment; filename="'+path+'"'})
@@ -106,7 +105,7 @@ def send_mail(imail,key,user):
     subject = 'Welcome to docuFile'
     message = f'Hi,\n'+user+' is requested for some document.\nPrivate key for that is '+str(key)+' .\n\nRegards,\ndocuFile.'
     email_from = settings.EMAIL_HOST_USER
-    recipient_list = ["jaiminchauhan23@gmail.com", ]
+    recipient_list = [imail]
     email = EmailMessage(subject, message, email_from, recipient_list)
     email.send()
 

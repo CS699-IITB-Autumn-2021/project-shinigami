@@ -54,7 +54,7 @@
             <th scope="row">{{ forloop.counter }}</th>
             <td>{{ i.insti }}</td>
             <td>{{i.type}}</td>
-            <td><a href="/User/download?path={{i.certi}}&pkey={{private_key}}">Download</a></td>
+            <td><a href="/User/download?path={{i.certi}}&pkey={{private_key}}" class="btn btn-success">Download</a></td>
         </tr>
         {% endfor %}
         {% else %}
