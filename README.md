@@ -17,18 +17,18 @@ Technology Stack (highlight ones learnt in CS699)
 
 
 List of deliverables:
-- [x] Create a sign-up page for Users
-- [x] Create a sign-up page for Institutes and Companies
-- [x] Create a common log-in page
-- [x] In User home-page, they're able to view their current documents.
-- [x] User able to grant or revoke view-permissions to Institute or Company and also see pending view-permissions.
-- [x] User able to see which Institutes or Companies can currently view his/her documents.
-- [x] Institute or Company (I/C) able to view an User's documents after receiving view permission from the User.
-- [x] I/C able to issue Certificates to Users.
-- [x] I/C able to request Users for view-permission of their documents.
-- [x] User able to request for certificates from an I/C.
-- [x] I/C able to view pending Certificate requests from User.
-- [x] Add encryption to Certificates
+:heavy_check_mark: Create a sign-up page for Users
+:heavy_check_mark: Create a sign-up page for Institutes and Companies
+:heavy_check_mark: Create a common log-in page
+:heavy_check_mark: In User home-page, they're able to view their current documents.
+:heavy_check_mark: User able to grant or revoke view-permissions to Institute or Company and also see pending view-permissions.
+:heavy_check_mark: User able to see which Institutes or Companies can currently view his/her documents.
+:heavy_check_mark: Institute or Company (I/C) able to view an User's documents after receiving view permission from the User.
+:heavy_check_mark: I/C able to issue Certificates to Users.
+:heavy_check_mark: I/C able to request Users for view-permission of their documents.
+:heavy_check_mark: User able to request for certificates from an I/C.
+:heavy_check_mark: I/C able to view pending Certificate requests from User.
+:heavy_check_mark: Add encryption to Certificates
 
 Dependencies:
 - Python3
