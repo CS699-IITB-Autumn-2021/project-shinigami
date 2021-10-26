@@ -11,13 +11,13 @@
               <li>
                   <a href="/Company">Home</a>
               </li>
-              <li> 
+              <li class="active"> 
                   <a href="/Company/view">View Certificates</a>
               </li>
-              <li>
-                  <a href="/Company/request">Request View Permissions</a>
+              <li> 
+                  <a href="/Company">Request View Permissions</a>
               </li>
-              <li class="active">
+              <li>
                   <a href="/Company/pending">Pending View Permissions</a>
               </li>
               <li>
@@ -27,8 +27,6 @@
                   <a href="{% url 'logout' %}">Log Out</a>
               </li>
           </ul>
-
-          
       </nav>
 {% endblock navbar %}
 
@@ -36,39 +34,34 @@
 <div class="container my-5">
     <center>
         <u>
-            <h1> Pending View Permissions</h1>
+            <h1> Certificates Available </h1>
         </u>
     </center>
 </div>
-{% if req %}
+{% if user %}
 <table class="table">
     <thead class="thead-dark">
         <tr>
-            <th scope="col"><center>No.</center></th>
-            <th scope="col"><center>User Unique Id</center></th>
-            <th scope="col"><center>Actions</center></th>
+            <th scope="col">No.</th>
+            <th scope="col">I/C Name</th>
+            <th scope="col">Certificate of</th>
+            <th scope="col">Actions</th>
         </tr>
     </thead>
     <tbody>
-        {% for i in req %}
+        {% for i in user %}
         <tr>
-            <th scope="row"><center>{{ forloop.counter }}</center></th>
-            <td><center>{{ i.uid }}</center></td>
-            <td>
-                <center>
-                <form method="POST" action="/Company/pending" enctype="multipart/form-data">
-                {% csrf_token %}
-                    <button type="submit" class="btn btn-danger" name="{{i.uid}}">Discontinue</button>
-                </form>
-                </center>
-            </td>
+            <th scope="row">{{ forloop.counter }}</th>
+            <td>{{ i.insti }}</td>
+            <td>{{i.type}}</td>
+            <td><a href="{{i.certi.url}}" download>Download</a>  preview</td>
         </tr>
         {% endfor %}
         {% else %}
         <div class="container mt-5">
             <center>
             <br><br>
-            <h4>No Pending Permission</h4>
+            <h4>Sorry, User hasn't given access to you!</h4>
             </center>
         </div>
         {% endif %}
