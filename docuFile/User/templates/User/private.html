@@ -8,10 +8,10 @@
 
     <ul class="list-unstyled components">
         <p>Welcome {{username}}</p>
-        <li class="active">
+        <li>
             <a href="/User">Home</a>
         </li>
-        <li>
+        <li class="active">
             <a href="/User/private">Pending View Requests</a>
         </li>
         <li>
@@ -31,7 +31,7 @@
 
 {% block body %}
 <div class="container mt-5 py-4">
-    <form method="post" action="/User/home" enctype="multipart/form-data">
+    <form method="post" action="/User/private" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="form-group">
             <label for="formGroupExampleInput">Private Key</label>

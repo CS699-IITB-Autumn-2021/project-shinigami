@@ -11,11 +11,11 @@
               <li>
                   <a href="/Company">Home</a>
               </li>
-              <li> 
+              <li class="active"> 
                   <a href="/Company/view">View Certificates</a>
               </li>
-              <li class="active"> 
-                  <a href="/Company">Request View Permissions</a>
+              <li> 
+                  <a href="/Company/request">Request View Permissions</a>
               </li>
               <li>
                   <a href="/Company/pending">Pending View Permissions</a>
@@ -32,11 +32,15 @@
 
 {% block body %}
 <div class="container mt-5 py-4">
-    <form method="post" action="/Company/request" enctype="multipart/form-data">
+    <form method="post" action="/Company/certificate" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="form-group">
             <label for="formGroupExampleInput">Person Id</label>
             <input type="text" class="form-control" id="formGroupExampleInput" name="pid" placeholder="Enter unique id for the person">
+        </div>
+        <div class="form-group">
+            <label for="formGroupExampleInput">Private Key</label>
+            <input type="text" class="form-control" id="formGroupExampleInput" name="private_key" placeholder="Enter private key for the person">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
