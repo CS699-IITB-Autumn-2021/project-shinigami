@@ -7,7 +7,7 @@
           </div>
 
           <ul class="list-unstyled components">
-              <p>Welcome</p>
+              <p>Welcome {{name}}!</p>
               <li>
                   <a href="/Company">Home</a>
               </li>
@@ -38,19 +38,19 @@
         {% csrf_token %}
         <div class="form-group">
             <label for="formGroupExampleInput">Person Id</label>
-            <input type="text" class="form-control" id="formGroupExampleInput" name="pid" placeholder="Enter unique id for the person">
+            <input type="text" class="form-control" id="formGroupExampleInput" name="pid" placeholder="Enter unique id for the person" required>
         </div>
         <div class="form-group">
             <label for="formGroupExampleInput2">Private Key</label>
-            <input type="text" class="form-control" id="formGroupExampleInput2" name="private_key" placeholder="Enter the private key of the person">
+            <input type="text" class="form-control" id="formGroupExampleInput2" name="private_key" placeholder="Enter the private key of the person" required>
         </div>
         <div class="form-group">
             <label for="formGroupExampleInput2">Certificate Type</label>
-            <input type="text" class="form-control" id="formGroupExampleInput2" name="type" placeholder="Enter the type of certificate you are uploading">
+            <input type="text" class="form-control" id="formGroupExampleInput2" name="type" placeholder="Enter the type of certificate you are uploading" required>
         </div>
         <div class="form-group">
             <label for="exampleFormControlFile1">Upload Certificate</label>
-            <input type="file" class="form-control-file" name="certificate" id="exampleFormControlFile1">
+            <input type="file" class="form-control-file" name="certificate" id="exampleFormControlFile1" required>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>

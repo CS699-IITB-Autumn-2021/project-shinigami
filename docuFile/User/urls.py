@@ -8,6 +8,6 @@ urlpatterns = [
     path('granted', views.granted, name='granted'),
     path('request', views.request, name='request'),
     path('home', views.home, name='home'),
-    path('private',views.private, name='private')
+    path('private',views.private, name='private'),
     path('download',views.download, name='download')
 ]

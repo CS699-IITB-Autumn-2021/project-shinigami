@@ -41,7 +41,8 @@ def index(request):
     d = certiRequest.objects.filter(iid = request.COOKIES["compname"])
 
     context = {
-        'data': d
+        'data': d,
+        'name': request.COOKIES["compname"]
     }
     
     return render(request, 'Company/index.html', context)
@@ -96,7 +97,12 @@ def issue(request):
             if t != None:
                 t.delete()
             enc_img(request.FILES['certificate'].name,key)
-    return render(request, 'Company/issue.html')
+
+    context = {
+        'name': request.COOKIES["compname"]
+    }
+
+    return render(request, 'Company/issue.html', context)
 
 def request(request):
     """ Loads a webpage that can be used by Company or Institute to request User for view-permission of documents
@@ -113,7 +119,12 @@ def request(request):
             d = viewRequest.objects.filter(uid = request.POST.get('pid'), ifirst = insti.first_name,ilast = insti.last_name)
             if not d.exists():
                 req = viewRequest.objects.create(ifirst = insti.first_name, ilast = insti.last_name, uid = user, status = 'NA')
-    return render(request, 'Company/request.html')
+
+    context = {
+        'name': request.COOKIES["compname"]
+    }
+
+    return render(request, 'Company/request.html', context)
 
 def pending(request):
     """ Loads the pending view-request to Users and gives facility to Institute or Company
@@ -126,7 +137,8 @@ def pending(request):
     insti = User.objects.get(username = request.COOKIES["compname"])
     req = viewRequest.objects.filter(status = 'NA', ifirst = insti.first_name, ilast = insti.last_name)
     context = {
-        'req': req
+        'req': req,
+        'name': request.COOKIES["compname"]
     }
     if request.method == 'POST':
         data = request.POST
@@ -140,7 +152,10 @@ def pending(request):
     return render(request, 'Company/pending.html', context)
 
 def view(request):
-    return render(request, 'Company/view.html')
+    context = {
+        'name': request.COOKIES["compname"]
+    }
+    return render(request, 'Company/view.html', context)
 
 def certificate(request):
     if request.method == 'POST':
@@ -150,10 +165,12 @@ def certificate(request):
         if t.status == 'A':
             cer = CertiInfo.objects.filter(user = pid)
             context = {
-                'user': cer
+                'user': cer,
+                'name': request.COOKIES["compname"]
             }
         else:
             context = {
-                'user': None
+                'user': None,
+                'name': request.COOKIES["compname"]
             }
     return render(request, 'Company/certificate.html', context)

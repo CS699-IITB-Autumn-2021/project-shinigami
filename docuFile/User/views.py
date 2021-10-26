@@ -23,7 +23,10 @@ def index(request):
     :returns: HttpResponse object with the User indexpage
 
 	"""
-    return render(request, 'User/home.html')
+    context = {
+        'name': request.COOKIES["username"]
+    }
+    return render(request, 'User/home.html', context)
 
 def dec_img(path,key):
     """ Decrypts an encrypted document by performing XOR using the private key of the User
@@ -71,6 +74,7 @@ def home(request):
         'username': request.COOKIES["username"],
         'private_key': key,
         'names':fname,
+        'name': request.COOKIES["username"]
     }
     return render(request, 'User/index.html', context)
 
@@ -87,7 +91,10 @@ def logout(request):
 def private(request):
     if request.method == 'POST':
         return redirect('/User/pending')
-    return render(request, 'User/private.html')
+    context = {
+        'name': request.COOKIES["username"]
+    }
+    return render(request, 'User/private.html', context)
 
 def pending(request):
     """ Loads the pending view-request from Institute or Company and gives facility to User
@@ -116,7 +123,8 @@ def pending(request):
             r.delete()
     req = viewRequest.objects.filter(status = 'NA', uid = request.COOKIES["username"])
     context = {
-        'req': req
+        'req': req,
+        'name': request.COOKIES["username"]
     }
     return render(request, 'User/pending.html', context)
 
@@ -147,7 +155,8 @@ def granted(request):
             r.delete()      
     granted = viewRequest.objects.filter(status = 'A', uid = request.COOKIES["username"])
     context = {
-        'grant': granted
+        'grant': granted,
+        'name': request.COOKIES["username"]
     }
     return render(request, 'User/granted.html', context)
 
@@ -187,4 +196,9 @@ def request(request):
         if not d.exists():
             r = certiRequest.objects.create(uid = user, iid = insti, type = type)
             r.save()
-    return render(request, 'User/request.html')
+    
+    context = {
+        'name': request.COOKIES["username"]
+    }
+
+    return render(request, 'User/request.html', context)
