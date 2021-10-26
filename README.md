@@ -65,7 +65,7 @@ Users can store their documents safely in DocuFile and share them with a registe
 - Student/Professionals: They will be the Users whose documents the Institute/Companies will check.
 
 ## Team Shinigami and its Contibutors:
-- Vinayak Bhartia (213050041): User homepage and Institute homepage, Uploading Certificates and View-Access, Database integration, Documentation <br />
+- Vinayak Bhartia (213050041): User homepage and Institute homepage, Uploading Certificates and View-Access, Database integration <br />
 - Sagar Biswas (213050079): User homepage and Institute homepage, Login and Signup, Database integration, Documentation <br />
 - Jaimin Chauhan (213059005): User homepage, Login and Signup, Encryption of documents, Database integration, Documentation <br />
 
