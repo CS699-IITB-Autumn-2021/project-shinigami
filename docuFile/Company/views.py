@@ -4,7 +4,7 @@ from User.models import certiRequest
 from login.models import CertiInfo
 from django.contrib.auth.models import User
 from django.conf import settings
-from django.core.mail import send_mail
+from django.http import HttpResponse
 
 import random
 
@@ -142,15 +142,46 @@ def pending(request):
 def view(request):
     return render(request, 'Company/view.html')
 
+def dec_img(path,key):
+    """ Decrypts an encrypted document by performing XOR using the private key of the User
+
+    :param path: path to encrypted image (document)
+    :param key: private key of User
+    :returns: decrypted image (document)
+
+	"""
+    fin = open("media/"+path, 'rb')
+    image = fin.read()
+    fin.close()
+    image = bytearray(image)
+    for index, values in enumerate(image):
+        image[index] = values ^ key
+    return image
+
+def download(request):
+    """ Downloads the decrypted document of an User
+
+    :param request: The request object used to generate this HttpResponse
+    :returns: decrypted image download response
+
+	"""
+    key = int(request.GET['pkey'])
+    path = request.GET['path']
+    payload = dec_img(path,key)
+    response = HttpResponse(bytes(payload), headers={ 'Content-Type': 'application/octet-stream', 'Content-Disposition': 'attachment; filename="'+path+'"'})
+    return response
+
 def certificate(request):
     if request.method == 'POST':
         pid = request.POST.get('pid')
         insti = User.objects.get(username = request.COOKIES["compname"])
         t = viewRequest.objects.get(ifirst = insti.first_name, ilast = insti.last_name, uid = pid)
+        key = int(request.POST.get('private_key'))
         if t.status == 'A':
             cer = CertiInfo.objects.filter(user = pid)
             context = {
-                'user': cer
+                'user': cer,
+                'private_key': key,
             }
         else:
             context = {
