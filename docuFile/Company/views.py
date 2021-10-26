@@ -99,3 +99,22 @@ def pending(request):
         r = viewRequest.objects.get(ifirst = insti.first_name, ilast = insti.last_name, uid = n)
         r.delete()
     return render(request, 'Company/pending.html', context)
+
+def view(request):
+    return render(request, 'Company/view.html')
+
+def certificate(request):
+    if request.method == 'POST':
+        pid = request.POST.get('pid')
+        insti = User.objects.get(username = request.COOKIES["compname"])
+        t = viewRequest.objects.get(ifirst = insti.first_name, ilast = insti.last_name, uid = pid)
+        if t.status == 'A':
+            cer = CertiInfo.objects.filter(user = pid)
+            context = {
+                'user': cer
+            }
+        else:
+            context = {
+                'user': None
+            }
+    return render(request, 'Company/certificate.html', context)

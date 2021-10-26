@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib import auth
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
@@ -29,6 +29,11 @@ def home(request):
 def logout(request):
     auth.logout(request)
     return HttpResponseRedirect('http://localhost:8000')
+
+def private(request):
+    if request.method == 'POST':
+        return redirect('/User/pending')
+    return render(request, 'User/private.html')
 
 def pending(request):
     if request.method == 'POST':
