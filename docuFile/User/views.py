@@ -66,9 +66,6 @@ def home(request):
 	"""
     user = CertiInfo.objects.filter(user = request.COOKIES["username"])
     key = int(request.POST.get('private_key'))
-    fname = []
-    for i in user:
-        fname.append(i.certi)
     context = {
         'user': user,
         'username': request.COOKIES["username"],
@@ -89,12 +86,31 @@ def logout(request):
     return HttpResponseRedirect('http://localhost:8000')
 
 def private(request):
-    if request.method == 'POST':
-        return redirect('/User/pending')
-    context = {
-        'name': request.COOKIES["username"]
-    }
-    return render(request, 'User/private.html', context)
+    if request.method == 'POST'):
+        context = {
+            'name': request.COOKIES["username"]
+        }
+        key = request.POST.get('private_key')
+        response =  HttpResponseRedirect('/User/pending')
+        response.set_cookie("pkey",key)
+        return response
+    return render(request, 'User/private.html')
+
+def send_mail(imail,msg):
+    """ Sends an email from a User to the Company or Institute whom User requests for a certificate.
+
+    :param imail: email of Institute or Company that receives the request
+    :param key: private key of User
+    :param user: username of User
+    :returns: None
+
+	"""
+    subject = 'Welcome to docuFile'
+    message = msg
+    email_from = settings.EMAIL_HOST_USER
+    recipient_list = [imail]
+    email = EmailMessage(subject, message, email_from, recipient_list)
+    email.send()
 
 def pending(request):
     """ Loads the pending view-request from Institute or Company and gives facility to User
@@ -105,6 +121,8 @@ def pending(request):
 
 	"""
     if request.method == 'POST':
+        key = request.COOKIES["pkey"]
+        print(key)
         data = request.POST
         count = 1
         for i in data.keys():
@@ -116,6 +134,9 @@ def pending(request):
         last = n.split('_')[2]
         if dec == 'accept':
             r = viewRequest.objects.get(ifirst = first, ilast = last, uid = request.COOKIES["username"])
+            imail = User.objects.filter(first_name=first,last_name=last)[0].email
+            msg = f'Hi,\n'+request.COOKIES["username"]+' is granted your requested for document view.\nPrivate key for viewing documents is '+str(key)+' .\n\nRegards,\ndocuFile.'
+            send_mail(imail,msg)
             r.status = 'A'
             r.save()
         elif dec == 'reject':
@@ -160,22 +181,6 @@ def granted(request):
     }
     return render(request, 'User/granted.html', context)
 
-def send_mail(imail,key,user):
-    """ Sends an email from a User to the Company or Institute whom User requests for a certificate.
-
-    :param imail: email of Institute or Company that receives the request
-    :param key: private key of User
-    :param user: username of User
-    :returns: None
-
-	"""
-    subject = 'Welcome to docuFile'
-    message = f'Hi,\n'+user+' is requested for some document.\nPrivate key for that is '+str(key)+' .\n\nRegards,\ndocuFile.'
-    email_from = settings.EMAIL_HOST_USER
-    recipient_list = [imail]
-    email = EmailMessage(subject, message, email_from, recipient_list)
-    email.send()
-
 def request(request):
     """ Loads a webpage that can be used by User to request Institute or Company for some documents
 
@@ -192,7 +197,8 @@ def request(request):
         imail = User.objects.filter(username=insti)[0].email
         fname = User.objects.filter(username=user)[0].first_name
         lname = User.objects.filter(username=user)[0].last_name
-        send_mail(imail,key,fname+' '+lname)
+        msg = f'Hi,\n'+fname+' '+lname+' is requested for some document.\nPrivate key for that is '+str(key)+' .\n\nRegards,\ndocuFile.'
+        send_mail(imail,msg)
         if not d.exists():
             r = certiRequest.objects.create(uid = user, iid = insti, type = type)
             r.save()
