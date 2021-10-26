@@ -13,11 +13,11 @@ Users can store their documents safely in DocuFile and share them with a registe
 6. A User's documents cannot be viewed by the admins. The private key used for encryption and decryption will not be stored in our servers. 
 
 ## Technology Stack
-- **HTML**
-- **CSS**
-- **Bootstrap**
-- **Python**
-- **SQLite**
+- **HTML** :pushpin:
+- **CSS** :pushpin:
+- **Bootstrap** :pushpin:
+- **Python** :pushpin:
+- **SQLite** :pushpin:
 - Django
 
 
