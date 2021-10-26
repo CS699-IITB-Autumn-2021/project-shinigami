@@ -15,6 +15,13 @@ from django.http import HttpResponseRedirect
 
 @login_required(login_url = '/login')
 def index(request):
+    """ Loads the Company index-page (homepage) template and also displays the pending
+    Certificate requests
+
+    :param request: The request object used to generate this response
+    :returns: HttpResponse object with the Company indexpage
+
+	"""
     if request.method == 'POST':
         data = request.POST
         count = 1
@@ -40,11 +47,24 @@ def index(request):
     return render(request, 'Company/index.html', context)
 
 def logout(request):
+    """ Logs out Company from app
+
+    :param request: The request object used to generate this response
+    :returns: Redirect to log-in page
+
+	"""
     auth.logout(request)
     return HttpResponseRedirect('http://localhost:8000')
 
 def enc_img(img,key):
-    # performing XOR operation on each value of bytearray
+    """ Encrypts an encrypted document by performing XOR on each value of bytearray using 
+    the private key of the User
+
+    :param img: path to image (document)
+    :param key: private key of User
+    :returns: encrypted image (document)
+
+	"""
     fin = open("media/"+img, 'rb')
     image = fin.read()
     fin.close()
@@ -56,6 +76,12 @@ def enc_img(img,key):
     fin.close()
 
 def issue(request):
+    """ Adds certificate to an User by the Institute or Company while also encrypting the certificate
+
+    :param request: The request object used to generate this response
+    :returns: HttpResponse object with the Issue certificate navbar open
+
+	"""
     if request.method == 'POST':
         username = request.POST.get('pid')
         print(username)
@@ -73,6 +99,12 @@ def issue(request):
     return render(request, 'Company/issue.html')
 
 def request(request):
+    """ Loads a webpage that can be used by Company or Institute to request User for view-permission of documents
+
+    :param request: The request object used to generate this response
+    :returns: HttpResponse object with the request View-permission navbar open
+
+	"""
     if request.method == 'POST':
         user = User.objects.get(username = request.POST.get('pid'))
         insti = User.objects.get(username = request.COOKIES["compname"])
@@ -84,6 +116,13 @@ def request(request):
     return render(request, 'Company/request.html')
 
 def pending(request):
+    """ Loads the pending view-request to Users and gives facility to Institute or Company
+    to Cancel the requests
+
+    :param request: The request object used to generate this response
+    :returns: HttpResponse object with the pending-requests navbar open
+
+	"""
     insti = User.objects.get(username = request.COOKIES["compname"])
     req = viewRequest.objects.filter(status = 'NA', ifirst = insti.first_name, ilast = insti.last_name)
     context = {

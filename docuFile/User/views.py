@@ -26,7 +26,7 @@ def index(request):
     return render(request, 'User/home.html')
 
 def dec_img(path,key):
-    """ Decrypts an encrypted document using the private key of the User
+    """ Decrypts an encrypted document by performing XOR using the private key of the User
 
     :param path: path to encrypted image (document)
     :param key: private key of User

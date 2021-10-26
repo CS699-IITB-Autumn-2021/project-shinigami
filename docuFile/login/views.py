@@ -18,9 +18,22 @@ import os
 
 
 def index(request):
+    """ Loads the Login index-page template
+
+    :param request: The request object used to generate this response
+    :returns: HttpResponse object with the Login indexpage
+
+	"""
     return render(request, 'index.html')
 
 def gen_pdf(uname,key):
+    """ Generates the pdf file to be sent to a User upon registration which contains their private key.
+    
+    :param uname: username of User
+    :param key: private key of User
+    :returns: None
+
+	"""
     pdf = FPDF()
     pdf.add_page()
     pdf.set_font("Arial", size = 15)
@@ -34,6 +47,13 @@ def gen_pdf(uname,key):
     pdf.output(str(uname)+".pdf")
 
 def enc_pdf(uname,passwd):
+    """ Encrypts the pdf file to be sent to a User upon registration with their account password as the pdf password.
+    
+    :param uname: username of User
+    :param key: private key of User
+    :returns: None
+
+	"""
     out = PdfFileWriter()
     file = PdfFileReader(uname+".pdf")
     num = file.numPages
@@ -45,6 +65,15 @@ def enc_pdf(uname,passwd):
         out.write(f)
 
 def gen_mail(uname,email,user_type):
+    """ Generates the email to be sent to User or Institute upon registration. If it is a User, it also attaches a 
+    password protected pdf file that contains their private key.
+    
+    :param uname: username of User or Institute
+    :param email: email of User or Institute
+    :param user_type: whether it is an User or an Institute
+    :returns: None
+
+	"""
     if user_type=="Personal":
         subject = 'Welcome to docuFile'
         message = f'Hi , thank you for registering in docuFile.\nYour private key is in the attach file.\nPassword of that file in your acc. password.\n\nRegards,\ndocuFile.'
@@ -62,6 +91,12 @@ def gen_mail(uname,email,user_type):
         email.send()
 
 def register(request):
+    """ Signs up a User or Institute on the webapp
+
+    :param request: The request object used to generate this response
+    :returns: HttpResponse object with the Login page or Signup page depending on whether it was a valid registration
+
+	"""
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
@@ -92,6 +127,12 @@ def register(request):
 
 
 def auth_view(request):
+    """ Authenticates the login of a User or Institute on the webapp
+
+    :param request: The request object used to generate this response
+    :returns: HttpResponse object with the response
+
+	"""
     username = request.POST.get('username', '')
     password = request.POST.get('password', '')
     user = auth.authenticate(username=username, password=password)
@@ -117,5 +158,11 @@ def auth_view(request):
 
 
 def invalidlogin(request):
+    """ Loads invalid login webpage template
+
+    :param request: The request object used to generate this response
+    :returns: HttpResponse object with the invalid login page
+
+	"""
     context = {"error": "enter valid username or password"}
     return render(request, 'invalidlogin.html', context)
