@@ -77,3 +77,13 @@ Users can store their documents safely in DocuFile and share them with a registe
 - https://docs.djangoproject.com/en/3.2/
 - https://bootstrapious.com/p/bootstrap-sidebar
 - https://www.youtube.com/playlist?list=PL-51WBLyFTg2vW-_6XBoUpE7vpmoR3ztO
+- https://stackoverflow.com/questions/48606087/getting-values-of-queryset-in-django
+- https://www.digitalflapjack.com/blog/2021/4/27/bytes-not-bytearrays-with-django-please
+- https://docs.djangoproject.com/en/3.2/ref/request-response/
+- https://www.delftstack.com/howto/django/django-reset-database/
+- https://docs.djangoproject.com/en/dev/internals/contributing/writing-documentation/
+- https://stackoverflow.com/questions/33218629/attaching-pdfs-to-emails-in-django
+- https://www.geeksforgeeks.org/setup-sending-email-in-django-project/
+- https://www.geeksforgeeks.org/setup-sending-email-in-django-project/
+- https://www.geeksforgeeks.org/convert-text-and-text-file-to-pdf-using-python/
+- https://www.geeksforgeeks.org/encrypt-and-decrypt-pdf-using-pypdf2/
