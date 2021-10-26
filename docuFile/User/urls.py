@@ -9,4 +9,5 @@ urlpatterns = [
     path('request', views.request, name='request'),
     path('home', views.home, name='home'),
     path('private',views.private, name='private')
+    path('download',views.download, name='download')
 ]

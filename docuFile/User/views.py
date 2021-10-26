@@ -9,6 +9,7 @@ from Company.models import viewRequest
 from pathlib import Path
 from django.core.mail import EmailMessage
 from django.conf import settings
+from django.http import HttpResponse
 import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -16,17 +17,70 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Create your views here.
 @login_required(login_url = '/login')
 def index(request):
+    """ Loads the User index-page template
+
+    :param request: The request object used to generate this response
+    :returns: HttpResponse object with the User indexpage
+
+	"""
     return render(request, 'User/home.html')
 
+def dec_img(path,key):
+    """ Decrypts an encrypted document by performing XOR using the private key of the User
+
+    :param path: path to encrypted image (document)
+    :param key: private key of User
+    :returns: decrypted image (document)
+
+	"""
+    fin = open("media/"+path, 'rb')
+    image = fin.read()
+    fin.close()
+    image = bytearray(image)
+    for index, values in enumerate(image):
+        image[index] = values ^ key
+    return image
+
+def download(request):
+    """ Downloads the decrypted document of an User
+
+    :param request: The request object used to generate this HttpResponse
+    :returns: decrypted image download response
+
+	"""
+    key = int(request.GET['pkey'])
+    path = request.GET['path']
+    payload = dec_img(path,key)
+    response = HttpResponse(bytes(payload), headers={ 'Content-Type': 'application/octet-stream', 'Content-Disposition': 'attachment; filename="'+path+'"'})
+    return response
+
 def home(request):
+    """ Loads the User home-page template
+
+    :param request: The request object used to generate this response
+    :returns: HttpResponse object with the User homepage
+
+	"""
     user = CertiInfo.objects.filter(user = request.COOKIES["username"])
+    key = int(request.POST.get('private_key'))
+    fname = []
+    for i in user:
+        fname.append(i.certi)
     context = {
         'user': user,
-        'username': request.COOKIES["username"]
+        'username': request.COOKIES["username"],
+        'private_key': key,
+        'names':fname,
     }
     return render(request, 'User/index.html', context)
 
 def logout(request):
+    """ Logs out User from app
+
+    :param request: The request object used to generate this response
+    :returns: Redirect to log-in page
+
+	"""
     auth.logout(request)
     return HttpResponseRedirect('http://localhost:8000')
 
@@ -36,6 +90,13 @@ def private(request):
     return render(request, 'User/private.html')
 
 def pending(request):
+    """ Loads the pending view-request from Institute or Company and gives facility to User
+    to either accept or reject the requests
+
+    :param request: The request object used to generate this response
+    :returns: HttpResponse object with the pending-requests navbar open
+
+	"""
     if request.method == 'POST':
         data = request.POST
         count = 1
@@ -60,6 +121,13 @@ def pending(request):
     return render(request, 'User/pending.html', context)
 
 def granted(request):
+    """ Loads the list of Institute or Company who have been granted view-request and gives facility to User
+    to remove the request either temporarily or permanently
+
+    :param request: The request object used to generate this response
+    :returns: HttpResponse object with the granted view-requests navbar open
+
+	"""
     if request.method == 'POST':
         data = request.POST
         count = 1
@@ -84,19 +152,33 @@ def granted(request):
     return render(request, 'User/granted.html', context)
 
 def send_mail(imail,key,user):
+    """ Sends an email from a User to the Company or Institute whom User requests for a certificate.
+
+    :param imail: email of Institute or Company that receives the request
+    :param key: private key of User
+    :param user: username of User
+    :returns: None
+
+	"""
     subject = 'Welcome to docuFile'
     message = f'Hi,\n'+user+' is requested for some document.\nPrivate key for that is '+str(key)+' .\n\nRegards,\ndocuFile.'
     email_from = settings.EMAIL_HOST_USER
-    recipient_list = ["jaiminchauhan23@gmail.com", ]
+    recipient_list = [imail]
     email = EmailMessage(subject, message, email_from, recipient_list)
     email.send()
 
 def request(request):
+    """ Loads a webpage that can be used by User to request Institute or Company for some documents
+
+    :param request: The request object used to generate this response
+    :returns: HttpResponse object with the request Certificate navbar open
+
+	"""
     if request.method == 'POST':
         insti = request.POST.get('iid')
         type = request.POST.get('type')
         user = request.COOKIES["username"]
-        key = 22
+        key = request.POST.get('private_key')
         d = certiRequest.objects.filter(uid = user, iid = insti, type = type)
         imail = User.objects.filter(username=insti)[0].email
         fname = User.objects.filter(username=user)[0].first_name
