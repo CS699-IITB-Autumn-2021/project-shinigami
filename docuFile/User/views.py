@@ -86,7 +86,7 @@ def logout(request):
     return HttpResponseRedirect('http://localhost:8000')
 
 def private(request):
-    if request.method == 'POST'):
+    if request.method == 'POST':
         context = {
             'name': request.COOKIES["username"]
         }

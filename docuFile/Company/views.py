@@ -196,8 +196,8 @@ def certificate(request):
             cer = CertiInfo.objects.filter(user = pid)
             context = {
                 'user': cer,
-                'name': request.COOKIES["compname"]
                 'private_key': key,
+                'name': request.COOKIES["compname"]
             }
         else:
             context = {
