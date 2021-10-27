@@ -70,7 +70,6 @@ def home(request):
         'user': user,
         'username': request.COOKIES["username"],
         'private_key': key,
-        'names':fname,
         'name': request.COOKIES["username"]
     }
     return render(request, 'User/index.html', context)
@@ -86,6 +85,11 @@ def logout(request):
     return HttpResponseRedirect('http://localhost:8000')
 
 def private(request):
+    """ Asks for private key of user
+
+    :param request: The request object used to generate this response
+    :returns: HttpResponse object with the enter private key page
+	"""
     if request.method == 'POST':
         context = {
             'name': request.COOKIES["username"]
@@ -100,8 +104,7 @@ def send_mail(imail,msg):
     """ Sends an email from a User to the Company or Institute whom User requests for a certificate.
 
     :param imail: email of Institute or Company that receives the request
-    :param key: private key of User
-    :param user: username of User
+    :param msg: msg to be sent in email
     :returns: None
 
 	"""

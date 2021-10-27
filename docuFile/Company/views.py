@@ -152,6 +152,12 @@ def pending(request):
     return render(request, 'Company/pending.html', context)
 
 def view(request):
+    """ Loads the webpage used to view certificates of User
+
+    :param request: The request object used to generate this response
+    :returns: HttpResponse object with the view-certificate navbar open
+
+	"""
     context = {
         'name': request.COOKIES["compname"]
     }
@@ -187,6 +193,12 @@ def download(request):
     return response
 
 def certificate(request):
+    """ Loads the certificates of User whose username the Institute or Company has entered
+
+    :param request: The request object used to generate this response
+    :returns: HttpResponse object with the view-Certificates navbar open
+
+	"""
     if request.method == 'POST':
         pid = request.POST.get('pid')
         insti = User.objects.get(username = request.COOKIES["compname"])
