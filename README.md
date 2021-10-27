@@ -86,3 +86,8 @@ Users can store their documents safely in DocuFile and share them with a registe
 - https://www.geeksforgeeks.org/setup-sending-email-in-django-project/
 - https://www.geeksforgeeks.org/convert-text-and-text-file-to-pdf-using-python/
 - https://www.geeksforgeeks.org/encrypt-and-decrypt-pdf-using-pypdf2/
+- https://www.youtube.com/watch?v=rHux0gMZ3Eg&t=9s
+- https://stackoverflow.com/questions/42150499/how-do-i-delete-db-sqlite3-in-django-1-9-to-start-from-scratch/42150639
+- https://medium.com/ibisdev/upload-multiple-images-to-a-model-with-django-fd00d8551a1c
+- https://stackoverflow.com/questions/40902890/django-image-src-not-found
+- https://stackoverflow.com/questions/21505255/identify-which-submit-button-was-clicked-in-django-form-submit/21505314
