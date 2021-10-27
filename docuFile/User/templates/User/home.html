@@ -7,7 +7,7 @@
     </div>
 
     <ul class="list-unstyled components">
-        <p>Welcome {{username}}</p>
+        <p>Welcome {{name}}!</p>
         <li class="active">
             <a href="/User">Home</a>
         </li>
@@ -35,7 +35,7 @@
         {% csrf_token %}
         <div class="form-group">
             <label for="formGroupExampleInput">Private Key</label>
-            <input type="text" class="form-control" id="formGroupExampleInput" name="private_key" placeholder="Enter your unique private key to view certificates">
+            <input type="text" class="form-control" id="formGroupExampleInput" name="private_key" placeholder="Enter your unique private key to view certificates" required>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
