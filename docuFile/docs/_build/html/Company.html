@@ -186,34 +186,153 @@ object the first time, the query is executed.</p>
 <section id="module-Company.views">
 <span id="company-views-module"></span><h2>Company.views module<a class="headerlink" href="#module-Company.views" title="Permalink to this headline"></a></h2>
 <dl class="py function">
+<dt class="sig sig-object py" id="Company.views.certificate">
+<span class="sig-prename descclassname"><span class="pre">Company.views.</span></span><span class="sig-name descname"><span class="pre">certificate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Company.views.certificate" title="Permalink to this definition"></a></dt>
+<dd><p>Loads the certificates of User whose username the Institute or Company has entered</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>request</strong> – The request object used to generate this response</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>HttpResponse object with the view-Certificates navbar open</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="Company.views.dec_img">
+<span class="sig-prename descclassname"><span class="pre">Company.views.</span></span><span class="sig-name descname"><span class="pre">dec_img</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Company.views.dec_img" title="Permalink to this definition"></a></dt>
+<dd><p>Decrypts an encrypted document by performing XOR using the private key of the User</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> – path to encrypted image (document)</p></li>
+<li><p><strong>key</strong> – private key of User</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>decrypted image (document)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="Company.views.download">
+<span class="sig-prename descclassname"><span class="pre">Company.views.</span></span><span class="sig-name descname"><span class="pre">download</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Company.views.download" title="Permalink to this definition"></a></dt>
+<dd><p>Downloads the decrypted document of an User</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>request</strong> – The request object used to generate this HttpResponse</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>decrypted image download response</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="Company.views.enc_img">
 <span class="sig-prename descclassname"><span class="pre">Company.views.</span></span><span class="sig-name descname"><span class="pre">enc_img</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Company.views.enc_img" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Encrypts an encrypted document by performing XOR on each value of bytearray using 
+the private key of the User</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>img</strong> – path to image (document)</p></li>
+<li><p><strong>key</strong> – private key of User</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>encrypted image (document)</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="Company.views.index">
 <span class="sig-prename descclassname"><span class="pre">Company.views.</span></span><span class="sig-name descname"><span class="pre">index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Company.views.index" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Loads the Company index-page (homepage) template and also displays the pending
+Certificate requests</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>request</strong> – The request object used to generate this response</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>HttpResponse object with the Company indexpage</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="Company.views.issue">
 <span class="sig-prename descclassname"><span class="pre">Company.views.</span></span><span class="sig-name descname"><span class="pre">issue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Company.views.issue" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Adds certificate to an User by the Institute or Company while also encrypting the certificate</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>request</strong> – The request object used to generate this response</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>HttpResponse object with the Issue certificate navbar open</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="Company.views.logout">
 <span class="sig-prename descclassname"><span class="pre">Company.views.</span></span><span class="sig-name descname"><span class="pre">logout</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Company.views.logout" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Logs out Company from app</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>request</strong> – The request object used to generate this response</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Redirect to log-in page</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="Company.views.pending">
 <span class="sig-prename descclassname"><span class="pre">Company.views.</span></span><span class="sig-name descname"><span class="pre">pending</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Company.views.pending" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Loads the pending view-request to Users and gives facility to Institute or Company
+to Cancel the requests</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>request</strong> – The request object used to generate this response</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>HttpResponse object with the pending-requests navbar open</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="Company.views.request">
 <span class="sig-prename descclassname"><span class="pre">Company.views.</span></span><span class="sig-name descname"><span class="pre">request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Company.views.request" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Loads a webpage that can be used by Company or Institute to request User for view-permission of documents</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>request</strong> – The request object used to generate this response</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>HttpResponse object with the request View-permission navbar open</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="Company.views.view">
+<span class="sig-prename descclassname"><span class="pre">Company.views.</span></span><span class="sig-name descname"><span class="pre">view</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Company.views.view" title="Permalink to this definition"></a></dt>
+<dd><p>Loads the webpage used to view certificates of User</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>request</strong> – The request object used to generate this response</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>HttpResponse object with the view-certificate navbar open</p>
+</dd>
+</dl>
+</dd></dl>
 
 </section>
 <section id="module-Company">
