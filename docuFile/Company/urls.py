@@ -1,6 +1,7 @@
 from django.urls import path
 from . import views
 
+# urls that the pages get redirected to
 urlpatterns = [
     path('', views.index, name='index'),
     path('logout',views.logout, name='logout'),

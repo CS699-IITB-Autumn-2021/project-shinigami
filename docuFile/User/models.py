@@ -1,6 +1,6 @@
 from django.db import models
 
-# Create your models here.
+# model contains the user id, institute id, and type field
 class certiRequest(models.Model):
     uid = models.CharField(max_length=100)
     iid = models.CharField(max_length=100)

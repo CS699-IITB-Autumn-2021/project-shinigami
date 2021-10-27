@@ -70,7 +70,7 @@ Users can store their documents safely in DocuFile and share them with a registe
 - Jaimin Chauhan (213059005): User homepage, Login and Signup, Encryption of documents, Database integration, Documentation <br />
 
 ## Path to Code Documentation:
-project-shinigami/docuFile/docs/_build/html/index.html
+project-shinigami/Documentation/_build/html/index.html
 
 ## References:
 - https://docs.djangoproject.com/en/3.2/
