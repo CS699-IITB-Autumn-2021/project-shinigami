@@ -2,24 +2,31 @@
 
 {% block navbar %}
 <nav id="sidebar">
+    <!-- DocuLocker  -->
     <div class="sidebar-header">
         <h3>DocuLocker</h3>
     </div>
 
+    <!-- Navbar Components  -->
     <ul class="list-unstyled components">
+        <!-- Welcome username  -->
         <p>Welcome {{name}}!</p>
         <li class="active">
             <a href="/User">Home</a>
         </li>
+        <!-- Pending View Requests  -->
         <li>
             <a href="/User/private">Pending View Requests</a>
         </li>
+        <!-- Granted View Requests  -->
         <li>
             <a href="/User/granted">Granted View Requests</a>
         </li>
+        <!-- Request Certificate  -->
         <li>
             <a href="/User/request">Request Certificate</a>
         </li>
+        <!-- Log Out  -->
         <li>
             <a href="/login">Log Out</a>
         </li>

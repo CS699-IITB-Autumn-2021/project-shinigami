@@ -2,27 +2,35 @@
 
 {% block navbar %}
 <nav id="sidebar">
+          <!-- DocuLocker  -->
           <div class="sidebar-header">
               <h3>DocuLocker</h3>
           </div>
 
+          <!-- Navbar Components  -->
           <ul class="list-unstyled components">
+              <!-- Welcome username  -->
               <p>Welcome {{name}}!</p>
               <li>
                   <a href="/Company">Home</a>
               </li>
+              <!-- View Certificates  -->
               <li class="active"> 
                   <a href="/Company/view">View Certificates</a>
               </li>
+              <!-- Request View Certificates  -->
               <li> 
                   <a href="/Company/request">Request View Permissions</a>
               </li>
+              <!-- Pending View Certificates  -->
               <li>
                   <a href="/Company/pending">Pending View Permissions</a>
               </li>
+              <!-- Upload Certificates  -->
               <li>
                   <a href="/Company/issue">Upload Certificates</a>
               </li>
+              <!-- Log Out  -->
               <li>
                   <a href="{% url 'logout' %}">Log Out</a>
               </li>
@@ -31,17 +39,21 @@
 {% endblock navbar %}
 
 {% block body %}
+<!-- View Certificates -->
 <div class="container mt-5 py-4">
     <form method="post" action="/Company/certificate" enctype="multipart/form-data">
         {% csrf_token %}
+        <!-- User name of Person whose certificate is to be viewed -->
         <div class="form-group">
             <label for="formGroupExampleInput">Person Id</label>
             <input type="text" class="form-control" id="formGroupExampleInput" name="pid" placeholder="Enter unique id for the person" required>
         </div>
+        <!-- Private key of Person whose certificate is to be viewed -->
         <div class="form-group">
             <label for="formGroupExampleInput">Private Key</label>
             <input type="text" class="form-control" id="formGroupExampleInput" name="private_key" placeholder="Enter private key for the person" required>
         </div>
+        <!-- submit button -->
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>
